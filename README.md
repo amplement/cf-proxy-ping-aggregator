@@ -38,4 +38,5 @@ sudo dpkg --build cf_proxy_ping_aggregator
 ```
 sudo dkpg -i cf_proxy_ping_aggregator.deb
 sudo systemctl status cf_proxy_ping_aggregator.service
+journalctl -u proxy_ping_aggregator.service
 ```

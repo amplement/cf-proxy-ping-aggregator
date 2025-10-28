@@ -4,7 +4,6 @@
 useradd --system --no-create-home --shell /usr/sbin/nologin proxyaggregator 2>/dev/null || true
 
 sudo mkdir -p /var/log/cf_proxy_ping_aggregator
-sudo chown -R proxyaggregator:proxyaggregator /var/log/cf_proxy_ping_aggregator
 
 # Redémarrer systemd pour prendre en compte le service
 systemctl daemon-reload
