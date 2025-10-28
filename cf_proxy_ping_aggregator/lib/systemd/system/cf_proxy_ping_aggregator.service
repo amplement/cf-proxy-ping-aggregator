@@ -5,7 +5,6 @@ After=network.target
 [Service]
 ExecStart=/usr/bin/python3 /usr/local/bin/cf_proxy_ping_aggregator.py --port 8080 --lport 3001 --lport 3000
 Restart=always
-User=proxyaggregator
 WorkingDirectory=/usr/local/bin/
 StandardOutput=append:/var/log/cf_proxy_ping_aggregator/output.log
 StandardError=append:/var/log/cf_proxy_ping_aggregator/output.err
