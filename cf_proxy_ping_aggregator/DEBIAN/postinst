@@ -1,3 +1,8 @@
 #!/bin/bash
+
+# Créer un utilisateur système sans shell ni home
+useradd --system --no-create-home --shell /usr/sbin/nologin proxyaggregator 2>/dev/null || tru
+
+# Redémarrer systemd pour prendre en compte le service
 systemctl daemon-reload
 systemctl enable cf_proxy_ping_aggregator.service

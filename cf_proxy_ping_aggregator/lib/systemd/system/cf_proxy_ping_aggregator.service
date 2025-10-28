@@ -5,8 +5,8 @@ After=network.target
 [Service]
 ExecStart=/usr/bin/python3 /usr/local/bin/cf_proxy_ping_aggregator.py --port 8080 --lport 3001 --lport 3000
 Restart=always
-User=nobody
-WorkingDirectory=/usr/local/scripts
+User=proxyaggregator
+WorkingDirectory=/usr/local/bin/
 
 [Install]
 WantedBy=multi-user.target
