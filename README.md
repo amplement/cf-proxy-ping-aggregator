@@ -31,12 +31,13 @@ python3 cf_proxy_ping_aggregator.py --port 8080 --lport 3001 --lport 3002 --lpor
 ### Construction du package debian
 Générer un package debian
 ```
-sudo dpkg --build cf_proxy_ping_aggregator
+dpkg --build cf_proxy_ping_aggregator
 ```
 
 ### Installation
 ```
 sudo dkpg -i cf_proxy_ping_aggregator.deb
+sudo systemctl start cf_proxy_ping_aggregator.service
 sudo systemctl status cf_proxy_ping_aggregator.service
 journalctl -u proxy_ping_aggregator.service
 ```
