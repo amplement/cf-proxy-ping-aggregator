@@ -3,7 +3,7 @@ Description=Proxy Ping Aggregator Service
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/python3 /usr/local/scripts/cf_proxy_ping_aggregator.py --port 8080 --lport 3001 --lport 3000
+ExecStart=/usr/bin/python3 /usr/local/bin/cf_proxy_ping_aggregator.py --port 8080 --lport 3001 --lport 3000
 Restart=always
 User=nobody
 WorkingDirectory=/usr/local/scripts
