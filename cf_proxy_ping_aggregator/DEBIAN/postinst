@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Créer un utilisateur système sans shell ni home
-useradd --system --no-create-home --shell /usr/sbin/nologin proxyaggregator 2>/dev/null || true
+# useradd --system --no-create-home --shell /usr/sbin/nologin proxyaggregator 2>/dev/null || true
 
 mkdir -p /var/log/cf_proxy_ping_aggregator
 
