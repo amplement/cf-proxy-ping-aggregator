@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import sys
 import http.server
 import socketserver
 import argparse
@@ -8,10 +9,12 @@ import http.client
 import time
 from urllib.parse import urlparse
 
-def output(line, logPath):
+def output(line, logPath, isError):
     if logPath:
         with open(logPath, 'a') as f:
             f.write(line + '\n')
+    elif isError: 
+        print(line, file=sys.stderr)
     else:
         print(line)
 
@@ -28,6 +31,7 @@ class ProxyHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
         start_time = time.time()
 
         responses = []
+        isError = False
         for port in self.server.local_ports:
             try:
                 conn = http.client.HTTPConnection('localhost', port, timeout=5)
@@ -43,6 +47,7 @@ class ProxyHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
                 })
                 conn.close()
             except Exception:
+                isError = True
                 responses.append({
                     'port': port,
                     'status': 500,
@@ -62,11 +67,12 @@ class ProxyHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
         self.send_header('Content-Length', str(len(final_response['body'])))
         self.end_headers()
         self.wfile.write(final_response['body'])
+
         logPath = hasattr(server, 'logfile') and server.logfile
-        output(f"{self.client_address[0]} - - [{self.log_date_time_string()}] \"{self.command} {self.path} {self.request_version}\" {final_response['status']} {len(final_response['body'])}", logPath)
+        output(f"{self.client_address[0]} - - [{self.log_date_time_string()}] \"{self.command} {self.path} {self.request_version}\" {final_response['status']} {len(final_response['body'])}", logPath, isError)
         
         for r in responses:
-            output(f"  - Port {r['port']} → Status: {r['status']}, Body: {r['body'].decode()}, Temps: {r['time']:.3f}s", logPath)
+            output(f"  - Port {r['port']} → Status: {r['status']}, Body: {r['body'].decode()[:10]}.., Temps: {r['time']:.3f}s", logPath, isError)
 
 parser = argparse.ArgumentParser(description='Local HTTP Proxy Aggregator')
 parser.add_argument('--port', type=int, required=True, help='Port to listen on')
@@ -83,6 +89,6 @@ class ThreadedHTTPServer(socketserver.ThreadingMixIn, http.server.HTTPServer):
         self.logfile = logPath
 
 server = ThreadedHTTPServer(('', args.port), ProxyHTTPRequestHandler, args.lport)
-output(f"Listening on port {args.port}, forwarding to ports {args.lport}", logPath)
+output(f"Listening on port {args.port}, forwarding to ports {args.lport}", logPath, False)
 
 server.serve_forever()
