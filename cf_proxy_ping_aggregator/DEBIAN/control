@@ -1,4 +1,4 @@
-Package: cf_proxy_ping_aggregator
+Package: cf-proxy-ping-aggregator
 Version: 1.0
 Section: base
 Priority: optional
