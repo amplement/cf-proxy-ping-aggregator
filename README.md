@@ -6,7 +6,7 @@
 
 La réponse consolidée est le résultat de l'aggrégation des services sous jacents.
 
-Son but initial est de permettre de monitorer l'ensemble des services se trouvant derrière le point de terminaison d'un load balancer Cloudflare.
+Son but initial est de permettre de monitorer l'ensemble des services se trouvant derrière le point de terminaison d'un load balancer Cloudflare. Le tout avec un seul service de moniteur Cloudflared.
 
 ---
 
@@ -40,7 +40,7 @@ python3 cf_proxy_ping_aggregator.py --port 5000 --lport 3001 --lport 3002 --lpor
 ```
 127.0.0.1 - - [29/Oct/2025 14:56:59] "GET /ping HTTP/1.1" 500
   - Port 3000 → Status: 200, Body: pong.., Temps: 0.008s
-  - Port 3001 → Status: 413, Body: ......, Temps: 0.012s
+  - Port 3001 → Status: 413, Body: error.., Temps: 0.012s
 ```
 
 ### Modifier les listen ports 
