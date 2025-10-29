@@ -10,9 +10,10 @@ from urllib.parse import urlparse
 
 def output(line, isError):
     if isError:
-        print(line, file=sys.stderr)
+        print(line, file=sys.stderr, flush=True)
     else:
-        print(line)
+        print(line, flush=True)
+
 
 class ProxyHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
     def log_message(self, format, *args):
