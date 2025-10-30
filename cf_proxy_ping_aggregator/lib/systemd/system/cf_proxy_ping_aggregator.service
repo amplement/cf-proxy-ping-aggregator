@@ -6,8 +6,8 @@ After=network.target
 ExecStart=/usr/bin/python3 /usr/local/bin/cf_proxy_ping_aggregator.py --port 5000 --lport 3000 --lport 3001
 Restart=always
 WorkingDirectory=/usr/local/bin/
-StandardOutput=append:/var/log/cf_proxy_ping_aggregator/output.log
-StandardError=append:/var/log/cf_proxy_ping_aggregator/output.err
+StandardOutput=null
+StandardError=journal
 
 [Install]
 WantedBy=multi-user.target
