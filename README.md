@@ -47,9 +47,13 @@ python3 cf_proxy_ping_aggregator.py --port 5000 --lport 3001 --lport 3002 --lpor
 Pour modifier les ports des services à écouter. Modifier le fichier de configuration du service systemd après installation et avant le démarrage.
 ```
 vim /lib/system/system32/cf_proxy_ping_aggregator.service
+
+# Si le service a déjà été démarré, relancé le daemon systemctl
+sudo systemctl daemon-reload
 ```
 
 ## Usage Linux
+Fonctionne avec systemd
 
 ### Construction du package debian
 Générer un package debian
@@ -65,7 +69,7 @@ sudo systemctl status cf_proxy_ping_aggregator.service
 journalctl -u cf_proxy_ping_aggregator.service -n 10
 ```
 
-### Uninstallation
+### Désinstallation
 ```
 sudo dpkg -r cf_proxy_ping_aggregator
 ```
