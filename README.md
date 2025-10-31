@@ -50,6 +50,7 @@ vim /lib/system/system32/cf_proxy_ping_aggregator.service
 
 # Si le service a déjà été démarré, relancé le daemon systemctl
 sudo systemctl daemon-reload
+sudo systemctl restart cf_proxy_ping_aggregator.service
 ```
 
 ## Usage Linux

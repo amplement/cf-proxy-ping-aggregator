@@ -57,9 +57,9 @@ class ProxyHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
                 })
 
         # Sélectionne la réponse finale
-        status_200_responses = [r for r in responses if r['status'] == 200 and r['body'].decode().strip() == 'pong']
-        if status_200_responses:
-            final_response = status_200_responses[0]
+        responses_errors = [r for r in responses if r['status'] != 200 or r['body'].decode().strip() != 'pong']
+        if responses_errors:
+            final_response = responses_errors[0]
         else:
             fastest_response = min(responses, key=lambda r: r['time'])
             final_response = fastest_response
