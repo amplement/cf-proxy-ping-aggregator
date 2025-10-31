@@ -16,8 +16,8 @@ Son but initial est de permettre de monitorer l'ensemble des services se trouvan
 2. **Rejeu de la requête** vers une liste de ports locaux définis via `--lport`  
 3. **Agrégation des réponses** :
    - Si toutes les réponses ont un statut HTTP `200` **et** un corps égal à `pong`, la première réponse est utilisée. Les détails de l’agrégation sont affichés dans la sortie standard
-   - Sinon, la réponse **la plus rapide** parmi celles en erreur est utilisée (statut ≠ 200 ou corps ≠ pong). Les logs sont redirigés vers la sortie d’erreur (stderr) pour faciliter le diagnostic.
-4. **Réponse au client initial** avec le statut et le corps déterminés.
+   - Sinon, la première réponse parmi celles en erreur est utilisée (statut ≠ 200 ou corps ≠ pong). Les logs sont redirigés vers la sortie d’erreur (stderr) pour faciliter le diagnostic.
+4. **Réponse au client initial** avec le statut et le corp déterminé.
 
 ---
 
